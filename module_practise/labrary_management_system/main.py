@@ -18,8 +18,8 @@ def view_all_books() -> None:
               
 def search_books() -> None:
               
-    search_type = input("search by (1) Title, (2) Author, (3) Genre: ")
-    query = input("Enter search term: ").lower()
+    search_type:str = input("search by (1) Title, (2) Author, (3) Genre: ")
+    query:str = input("Enter search term: ").lower()
     print("\nsearch Results:")
 
     for book in books:
@@ -45,12 +45,12 @@ def view_users() -> None:
     for user in users:
         print(f"User ID: {user['id']}, Name: {user['name']}, Borrowed books: {', '.join(user['borrowed_books']) or 'None'}")
 def borrow_book() -> None:
-    user_id = int(input("Enter your User ID: "))
-    book_id  = int(input("Enter the Book ID to borrow: "))
+    user_id:int = int(input("Enter your User ID: "))
+    book_id:int  = int(input("Enter the Book ID to borrow: "))
 
-    user = next((user for user in users if user["id"]  == user_id), None)
+    user:list = next((user for user in users if user["id"]  == user_id), None)
     
-    book = next((book for book in books if book["id"]  == book_id), None)
+    book:list = next((book for book in books if book["id"]  == book_id), None)
     if user and book:
         if book["status"] == "available":
             book["status"] = "Checked out"
@@ -62,11 +62,11 @@ def borrow_book() -> None:
         print("Invalid user ID or book ID.")
 
 def return_book() -> None:
-    user_id = int(input("Enter your user ID: "))
-    book_id = int(input("Enter the book ID to return : "))
+    user_id:int = int(input("Enter your user ID: "))
+    book_id:int = int(input("Enter the book ID to return : "))
 
-    user = next ((user for user in users if user["id"] ==user_id), None)
-    book = next ((book for book in books if book["id"] ==book_id), None)     
+    user:list = next ((user for user in users if user["id"] ==user_id), None)
+    book:list = next ((book for book in books if book["id"] ==book_id), None)     
 
     if user and book:
         if book["title"] in user["borrowed_books"]:
